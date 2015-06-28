@@ -53,16 +53,18 @@ module Jekyll
                     "posts" => posts,
                     "total_posts" => postCount,
                     "total_pages" => pageCount }
+        
+      prefix = self.config['author_dir'] || 'authors'
       
       if  index != 0
           paginator['previous_page'] = index
-          path = self.config['paginate_path']
+          path = '/' + File.join(prefix, slug, self.config['paginate_path'])
           paginator['previous_page_path'] = path.sub(':num', (index).to_s)
       end
       
       if index != (pageCount - 1)
           paginator['next_page'] = index+2
-          path = self.config['paginate_path']
+          path = '/' + File.join(prefix, slug, self.config['paginate_path'])
           paginator['next_page_path'] = path.sub(':num', (index+2).to_s)
       end 
     
