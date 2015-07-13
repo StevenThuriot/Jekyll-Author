@@ -8,7 +8,7 @@ module Jekyll
       @base = base
       @dir  = File.join((site.config['author_dir'] || 'authors'), slug)
       @name = 'index.html'      
-        
+              
       if index != 0          
           path = site.config['paginate_path']
           @name =  path.sub(':num', (index+1).to_s)
@@ -110,9 +110,11 @@ module Jekyll
           
           authorHash.each do |slug, posts|              
             author = self.data['authors'][slug]     
+            
+            posts = posts.reverse
               
             self.write_author_feed(slug, author, posts)  
-            
+              
             if self.config['paginate']
                 slicedPosts = posts.each_slice(5).to_a             
                 slicedPosts.each_with_index do |slice, i|
